@@ -13,7 +13,7 @@ App::App() :
 
 int App::Run()
 {
-    pes.CatchProcess();
+    //pes.CatchProcess();
 
     while (!interrupted)
     {
@@ -27,6 +27,8 @@ int App::Run()
 void App::Update()
 {
     system("cls");
+
+    /*
 
     unsigned int seconds = pes.GetSeconds();
     if (seconds == 0)
@@ -48,4 +50,6 @@ void App::Update()
         << homeTeamName << ' ' << homeScore << " x " << awayScore << ' ' << awayTeamName;
 
     std::cout << oss.str();
+
+    */
 }
