@@ -162,4 +162,9 @@ unsigned int PES::GetAwayTeamScore() const
     return score;
 }
 
+bool PES::isInGame() const
+{
+    return !(GetSeconds() == 0 && GetMinutes() == 0);
+}
+
 

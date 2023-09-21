@@ -25,6 +25,8 @@ public:
 	unsigned int GetHomeTeamScore() const;
 	unsigned int GetAwayTeamScore() const;
 
+	bool isInGame() const;
+
 private:
 	HANDLE process{};
 	DWORD64 baseAddress{};

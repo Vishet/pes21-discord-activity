@@ -30,8 +30,7 @@ void App::Update()
 {
     system("cls");
 
-    unsigned int seconds = pes.GetSeconds();
-    if (seconds == 0)
+    if (!pes.isInGame())
     {
         std::cout << "In menu";
         discord.SetDetails("In menu");
@@ -45,6 +44,7 @@ void App::Update()
     std::string awayTeamName = pes.GetAwayTeamName();
     unsigned int homeScore = pes.GetHomeTeamScore();
     unsigned int awayScore = pes.GetAwayTeamScore();
+    unsigned int seconds = pes.GetSeconds();
     unsigned int minutes = pes.GetMinutes();
 
     std::ostringstream info;
