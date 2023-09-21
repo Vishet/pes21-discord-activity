@@ -15,9 +15,8 @@ void Discord::Init()
 
     this->pCore.reset(pCore);
 
-    discord::Activity activity{};
-    activity.SetDetails("In game");
-    activity.SetState("Barcelona 3 x 2 Chelsea");
+    activity.SetDetails("In menu");
+    activity.SetState("");
     activity.GetAssets().SetLargeImage(largeImage);
     activity.GetAssets().SetLargeText(largeText);
     activity.SetType(discord::ActivityType::Playing);
@@ -34,4 +33,19 @@ void Discord::Init()
 void Discord::Update()
 {
     pCore->RunCallbacks();
+}
+
+void Discord::UpdateActivity()
+{
+    pCore->ActivityManager().UpdateActivity(activity, [](discord::Result) {});
+}
+
+void Discord::SetDetails(const char* details)
+{
+    activity.SetDetails(details);
+}
+
+void Discord::SetState(const char* state)
+{
+    activity.SetState(state);
 }

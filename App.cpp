@@ -14,7 +14,7 @@ App::App() :
 
 int App::Run()
 {
-    //pes.CatchProcess();
+    pes.CatchProcess();
     discord.Init();
 
     while (!interrupted)
@@ -29,14 +29,15 @@ int App::Run()
 void App::Update()
 {
     system("cls");
-    discord.Update();
-
-    /*
 
     unsigned int seconds = pes.GetSeconds();
     if (seconds == 0)
     {
         std::cout << "In menu";
+        discord.SetDetails("In menu");
+        discord.SetState("");
+        discord.UpdateActivity();
+        discord.Update();
         return;
     }
 
@@ -46,13 +47,22 @@ void App::Update()
     unsigned int awayScore = pes.GetAwayTeamScore();
     unsigned int minutes = pes.GetMinutes();
 
-    std::ostringstream oss;
-    oss << "Home team name: " << homeTeamName << std::endl
+    std::ostringstream info;
+    info << "Home team name: " << homeTeamName << std::endl
         << "Away team name: " << awayTeamName << std::endl
         << "Time: " << minutes << ':' << seconds << std::endl
         << homeTeamName << ' ' << homeScore << " x " << awayScore << ' ' << awayTeamName;
 
-    std::cout << oss.str();
+    std::cout << info.str();
 
-    */
+    std::ostringstream timeInfo;
+    timeInfo << "In game " << minutes << '\'';
+    discord.SetDetails(timeInfo.str().c_str());
+
+    std::ostringstream scoreBoard;
+    scoreBoard << homeTeamName << ' ' << homeScore << " x " << awayScore << ' ' << awayTeamName;
+    discord.SetState(scoreBoard.str().c_str());
+
+    discord.UpdateActivity();
+    discord.Update();
 }
