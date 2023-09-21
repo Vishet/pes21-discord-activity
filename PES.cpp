@@ -101,19 +101,19 @@ unsigned int PES::GetMinutes() const
     DWORD64 staticAddress = baseAddress + timeMinutesStatic;
 
     DWORD64 address3{};
-    if (!ReadProcessMemory(process, (void*)staticAddress, &address3, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)staticAddress, &address3, 8, NULL)) return 0;
     address3 += timeMinutesOffset;
 
     DWORD64 address2{};
-    if (!ReadProcessMemory(process, (void*)address3, &address2, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address3, &address2, 8, NULL)) return 0;
     address2 += timeMinutesOffset2;
 
     DWORD64 address{};
-    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) return 0;
     address += timeMinutesOffset3;
 
     int minutes{};
-    if (!ReadProcessMemory(process, (void*)address, &minutes, 4, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address, &minutes, 4, NULL)) return 0;
 
     return minutes;
 }
@@ -123,19 +123,19 @@ unsigned int PES::GetHomeTeamScore() const
     DWORD64 staticAddress = baseAddress + scoreStatic;
 
     DWORD64 address3{};
-    if (!ReadProcessMemory(process, (void*)staticAddress, &address3, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)staticAddress, &address3, 8, NULL)) return 0;
     address3 += scoreOffset;
 
     DWORD64 address2{};
-    if (!ReadProcessMemory(process, (void*)address3, &address2, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address3, &address2, 8, NULL)) return 0;
     address2 += scoreOffset2;
 
     DWORD64 address{};
-    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) return 0;
     address += scoreHomeOffset;
 
     unsigned int score{};
-    if (!ReadProcessMemory(process, (void*)address, &score, 4, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address, &score, 4, NULL)) return 0;
 
     return score;
 }
@@ -145,19 +145,19 @@ unsigned int PES::GetAwayTeamScore() const
     DWORD64 staticAddress = baseAddress + scoreStatic;
 
     DWORD64 address3{};
-    if (!ReadProcessMemory(process, (void*)staticAddress, &address3, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)staticAddress, &address3, 8, NULL)) return 0;
     address3 += scoreOffset;
 
     DWORD64 address2{};
-    if (!ReadProcessMemory(process, (void*)address3, &address2, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address3, &address2, 8, NULL)) return 0;
     address2 += scoreOffset2;
 
     DWORD64 address{};
-    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) return 0;
     address += scoreAwayOffset;
 
     unsigned int score{};
-    if (!ReadProcessMemory(process, (void*)address, &score, 4, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address, &score, 4, NULL)) return 0;
 
     return score;
 }
