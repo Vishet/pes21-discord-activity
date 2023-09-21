@@ -82,16 +82,16 @@ std::string PES::GetAwayTeamName() const
     return buffer;
 }
 
-unsigned int PES::GetSeconds() const
+unsigned int PES::GetSeconds()
 {
     DWORD64 staticAddress = baseAddress + timeSecondsStatic;
 
     DWORD64 address{};
-    if(!ReadProcessMemory(process, (void*)staticAddress, &address, 8, NULL)) throw;
+    if(!ReadProcessMemory(process, (void*)staticAddress, &address, 8, NULL)) isClosing = true;
     address += timeSecondsOffset;
 
     int seconds = 0;
-    if(!ReadProcessMemory(process, (void*)address, &seconds, 4, NULL)) throw;
+    if(!ReadProcessMemory(process, (void*)address, &seconds, 4, NULL)) isClosing = true;
 
     return seconds;
 }
@@ -162,7 +162,7 @@ unsigned int PES::GetAwayTeamScore() const
     return score;
 }
 
-bool PES::isInGame() const
+bool PES::IsInGame()
 {
     return !(GetSeconds() == 0 && GetMinutes() == 0);
 }

@@ -19,17 +19,19 @@ public:
 
 	std::string GetHomeTeamName() const;
 	std::string GetAwayTeamName() const;
-	unsigned int GetSeconds() const;
+	unsigned int GetSeconds();
 	unsigned int GetMinutes() const;
 
 	unsigned int GetHomeTeamScore() const;
 	unsigned int GetAwayTeamScore() const;
 
-	bool isInGame() const;
+	bool IsInGame();
+	inline bool IsClosing() const { return isClosing; }
 
 private:
 	HANDLE process{};
 	DWORD64 baseAddress{};
+	bool isClosing = false;
 
 	static constexpr auto teamNameStatic    = 0x3705E10;
 	static constexpr auto teamOffset		= 0x50;

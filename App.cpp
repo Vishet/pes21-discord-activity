@@ -19,6 +19,7 @@ int App::Run()
 
     while (!interrupted)
     {
+        if (pes.IsClosing()) break;
         Update();
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
@@ -30,7 +31,7 @@ void App::Update()
 {
     system("cls");
 
-    if (!pes.isInGame())
+    if (!pes.IsInGame())
     {
         std::cout << "In menu";
         discord.SetDetails("In menu");
