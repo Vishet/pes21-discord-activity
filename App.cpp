@@ -6,7 +6,8 @@
 #include <sstream>
 
 App::App() :
-	pes()
+	pes(),
+    discord()
 {
     std::signal(SIGINT, [](int) { interrupted = true; });
 }
@@ -14,6 +15,7 @@ App::App() :
 int App::Run()
 {
     //pes.CatchProcess();
+    discord.Init();
 
     while (!interrupted)
     {
@@ -27,6 +29,7 @@ int App::Run()
 void App::Update()
 {
     system("cls");
+    discord.Update();
 
     /*
 

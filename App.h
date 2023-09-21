@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PES.h"
+#include "Discord.h"
 
 class App
 {
@@ -11,6 +12,7 @@ public:
 
 private:
 	PES pes;
+	Discord discord;
 	inline static bool interrupted{ false };
 
 private:
