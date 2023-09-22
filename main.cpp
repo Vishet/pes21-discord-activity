@@ -1,6 +1,7 @@
 #include "App.h"
 #include <exception>
 #include "discord-files/discord.h"
+#include <sstream>
 
 int main()
 {
@@ -15,6 +16,18 @@ int main()
     catch (const char* e)
     {
         return MessageBox(NULL, e, "Exception", MB_OK | MB_ICONEXCLAMATION);
+    }
+    catch (discord::Result e)
+    {
+        std::ostringstream oss;
+        oss << "Error code: " << std::hex << static_cast<int>(e);
+        return MessageBox(NULL, oss.str().c_str(), "Discord Exception", MB_OK | MB_ICONEXCLAMATION);
+    }
+    catch (DWORD e)
+    {
+        std::ostringstream oss;
+        oss << "Error code: " << std::hex << e;
+        return MessageBox(NULL, oss.str().c_str(), "Windows Exception", MB_OK | MB_ICONEXCLAMATION);
     }
     catch (...)
     {

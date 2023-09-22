@@ -51,15 +51,15 @@ std::string PES::GetHomeTeamName() const
     DWORD64 staticAddress = baseAddress + teamNameStatic;
 
     DWORD64 address2{};
-    if (!ReadProcessMemory(process, (void*)staticAddress, &address2, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)staticAddress, &address2, 8, NULL)) throw GetLastError();
     address2 += teamOffset;
 
     DWORD64 address{};
-    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) throw GetLastError();
     address += homeOffset;
 
     char buffer[64]{};
-    if (!ReadProcessMemory(process, (void*)address, &buffer, 64, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address, &buffer, 64, NULL)) throw GetLastError();
 
     return buffer;
 }
@@ -69,15 +69,15 @@ std::string PES::GetAwayTeamName() const
     DWORD64 staticAddress = baseAddress + teamNameStatic;
 
     DWORD64 address2{};
-    if (!ReadProcessMemory(process, (void*)staticAddress, &address2, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)staticAddress, &address2, 8, NULL)) throw GetLastError();
     address2 += teamOffset;
 
     DWORD64 address{};
-    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address2, &address, 8, NULL)) throw GetLastError();
     address += awayOffset;
 
     char buffer[64]{};
-    if (!ReadProcessMemory(process, (void*)address, &buffer, 64, NULL)) throw;
+    if (!ReadProcessMemory(process, (void*)address, &buffer, 64, NULL)) throw GetLastError();
 
     return buffer;
 }

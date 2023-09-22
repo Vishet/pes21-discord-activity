@@ -9,9 +9,12 @@ void Discord::Init()
     discord::Core* pCore{};
     auto result = discord::Core::Create(
         clientId,
-        DiscordCreateFlags_Default,
+        DiscordCreateFlags_NoRequireDiscord,
         &pCore
     );
+
+    if (result != discord::Result::Ok)
+        throw result;
 
     this->pCore.reset(pCore);
 
@@ -25,14 +28,15 @@ void Discord::Init()
     activity.GetTimestamps().SetStart(now);
 
     pCore->ActivityManager().UpdateActivity(activity, [](discord::Result result) {
-        std::cout << ((result == discord::Result::Ok) ? "Succeeded" : "Failed")
-            << " updating activity!\n";
+        if (result != discord::Result::Ok) throw result;
     });
 }
 
 void Discord::Update()
 {
-    pCore->RunCallbacks();
+    auto result = pCore->RunCallbacks();
+    if (result != discord::Result::Ok)
+        throw result;
 }
 
 void Discord::UpdateActivity()
